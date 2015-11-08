@@ -1,0 +1,38 @@
+---
+- name: Validate Ansible version
+  assert:
+    that:
+     - "{{ ansible_version is defined }}"
+     - "{{ ansible_version.full | version_compare(minimum_ansible_version, '>=') }}"
+    msg: "Your Ansible version is too old. Please update from {{ ansible_version.full | default('< 1.6') }} to {{ minimum_ansible_version }} or above."
+
+- name: Update Apt
+  apt: update_cache=yes
+
+- name: Checking essentials
+  apt: name="{{ item }}" state=present
+  with_items:
+  - python-software-properties
+  - python-pycurl
+  - build-essential
+  - software-properties-common
+  - curl
+  - git-core
+  - awscli
+
+- name: Validate timezone variable
+  stat: path=/usr/share/zoneinfo/{{ default_timezone }}
+  register: timezone_path
+  changed_when: false
+
+- name: Explain timezone error
+  fail: msg="{{ default_timezone }} is not a valid timezone. For a list of valid timezones, check https://php.net/manual/en/timezones.php"
+  when: not timezone_path.stat.exists
+
+- name: Get current timezone
+  command: cat /etc/timezone
+  register: current_timezone
+  changed_when: false
+
+- name: Set timezone
+  command: timedatectl set-timezone {{ default_timezone }}
