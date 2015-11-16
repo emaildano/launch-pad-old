@@ -7,7 +7,6 @@
   with_items:
   - php5-common
   - php5-fpm
-  - php5-mysqlnd
   - php5-xmlrpc
   - php5-mcrypt
   - php5-curl

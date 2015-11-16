@@ -16,9 +16,6 @@ upload_max_filesize = {{ php_upload_max_filesize }}
 expose_php = Off
 date.timezone = {{ php_default_timezone }}
 
-[mysqlnd]
-mysqlnd.collect_memory_statistics = {{ php_mysqlnd_collect_memory_statistics }}
-
 [opcache]
 opcache.enable = {{ php_opcache_enable }}
 opcache.enable_cli = {{ php_opcache_enable_cli }}
@@ -32,5 +29,3 @@ opcache.fast_shutdown = {{ php_opcache_fast_shutdown }}
 hhvm.log.level = Warning
 hhvm.log.always_log_unhandled_exceptions = true
 hhvm.log.runtime_error_reporting_level = 8191
-hhvm.mysql.socket = /var/run/mysqld/mysqld.sock
-hhvm.mysql.typed_results = false

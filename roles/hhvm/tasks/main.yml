@@ -22,8 +22,8 @@
 - name: HHVM php.ini
   template: src=php.ini.j2 dest=/etc/hhvm/php.ini
 
-- name: Start HHVM service
-  service: name=hhvm state=started enabled=true
+- name: Create hhvm.conf
+  template: src=hhvm.conf.j2 dest=/etc/nginx/hhvm.conf
 
 - name: HHVM server.ini
   template: src=server.ini.j2 dest=/etc/hhvm/server.ini
@@ -37,3 +37,6 @@
         user=root
         cron_file=hhvm-daily-restart
   when: hhvm_daily_restart | default(True)
+
+- name: Start HHVM service
+  service: name=hhvm state=restarted enabled=true
