@@ -1,0 +1,61 @@
+# ==============================================================================
+# Global
+# ==============================================================================
+
+www_root: /srv/www
+apt_cache_valid_time: 86400
+
+# ==============================================================================
+# Common ./roles/common/defaults/main.yml
+# ==============================================================================
+
+default_timezone: Etc/UTC
+
+# ==============================================================================
+# Ferm ./roles/ferm/defaults/main.yml
+# ==============================================================================
+
+ferm_enabled: true
+
+ferm_input_list:
+  - type: dport_accept
+    dport: [http, https]
+    filename: nginx_accept
+  - type: dport_accept
+    dport: [ssh]
+    saddr: ["{{ lookup('pipe', 'curl -4 https://diagnostic.opendns.com/myip') }}"]
+  - type: dport_limit
+    dport: [ssh]
+    seconds: 300
+    hits: 20
+
+# ==============================================================================
+# Users
+# ==============================================================================
+
+web_user: web
+web_group: www-data
+
+users:
+  - name: "{{ web_user }}"
+    groups:
+      - "{{ web_group }}"
+
+web_sudoers:
+  - "/usr/sbin/service hhvm *"
+  - "/usr/sbin/service php5-fpm *"
+
+# ==============================================================================
+# WordPress Setup
+# ==============================================================================
+
+wordpress_sites:
+  site-one.com:
+    site_hosts:
+      - site-one.dev
+    admin_email: admin@site-one.dev
+    ssl:
+      enabled: false
+    cache:
+      enabled: false
+      duration: 30s
