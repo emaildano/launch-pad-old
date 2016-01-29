@@ -21,7 +21,7 @@
 - name: Disable default server
   file: path=/etc/nginx/sites-enabled/default state=absent
   notify: reload nginx
-  when: disable_nginx_default | default(false)
+  when: disable_nginx_default | default(true)
 
 - name: Enable better default site to drop unknown requests
   command: creates=/etc/nginx/sites-enabled/no-default.conf cp /etc/nginx/h5bp-server-configs/sites-available/no-default /etc/nginx/sites-enabled/no-default.conf

@@ -1,3 +1,1 @@
-vendor/roles
-group_vars/all/*
-!group_vars/all/main.yml.example
+.vagrant

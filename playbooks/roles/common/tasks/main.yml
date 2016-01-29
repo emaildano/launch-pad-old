@@ -19,6 +19,8 @@
   - curl
   - git-core
   - awscli
+  - ansible
+  - python-passlib
 
 - name: Validate timezone variable
   stat: path=/usr/share/zoneinfo/{{ default_timezone }}

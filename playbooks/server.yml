@@ -1,8 +1,7 @@
 ---
-- name: WordPress Server
-  hosts: web
-  sudo: yes
-  remote_user: ubuntu
+- name: Server
+  hosts: all:vagrant
+  become: yes
   roles:
     - { role: common, tags: [common] }
     - { role: ferm, tags: [ferm] }
@@ -14,4 +13,4 @@
     - { role: memcached, tags: [memcached] }
     - { role: composer, tags: [composer] }
     - { role: wp-cli, tags: [wp-cli] }
-    - { role: wordpress-setup, tags: [wordpress, wordpress-setup] }
+    - { role: site-setup, tags: [site-setup] }
