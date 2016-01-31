@@ -5,6 +5,10 @@
 www_root: /srv/www
 apt_cache_valid_time: 86400
 
+web_sudoers:
+  - "/usr/sbin/service hhvm *"
+  - "/usr/sbin/service php5-fpm *"
+
 # ==============================================================================
 # Common ./roles/common/defaults/main.yml
 # ==============================================================================
@@ -28,34 +32,3 @@ ferm_input_list:
     dport: [ssh]
     seconds: 300
     hits: 20
-
-# ==============================================================================
-# Users
-# ==============================================================================
-
-web_user: web
-web_group: www-data
-
-users:
-  - name: "{{ web_user }}"
-    groups:
-      - "{{ web_group }}"
-
-web_sudoers:
-  - "/usr/sbin/service hhvm *"
-  - "/usr/sbin/service php5-fpm *"
-
-# ==============================================================================
-# WordPress Setup
-# ==============================================================================
-
-wordpress_sites:
-  site-one.com:
-    site_hosts:
-      - site-one.dev
-    admin_email: admin@site-one.dev
-    ssl:
-      enabled: false
-    cache:
-      enabled: false
-      duration: 30s
