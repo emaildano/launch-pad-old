@@ -1,11 +1,17 @@
 # ==============================================================================
-# Sites
+# Hosted Sites
 # ==============================================================================
 
-sites:
+hosted_sites:
   site-one.com:
     site_hosts:
       - site-one.dev
+    cache:
+      enabled: false
+      duration: 30s
+  site-two.com:
+    site_hosts:
+      - site-two.dev
     cache:
       enabled: false
       duration: 30s

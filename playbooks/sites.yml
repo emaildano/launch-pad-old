@@ -1,19 +1,13 @@
 ---
-- name: Setup Site
+- name: Setup Hosted Sites
   hosts: all:localhost
   sudo: yes
 
   vars_files:
-  - roles/nginx/defaults/main.yml
+    - roles/nginx/defaults/main.yml
 
   handlers:
-  - include: roles/common/handlers/main.yml
-
-  vars_prompt:
-    - name: "prompt_domain"
-      prompt: Domain Name
-      confirm: no
-      private: no
+    - include: roles/common/handlers/main.yml
 
   roles:
-    - { role: site-setup, tags: [site-setup] }
+    - { role: hosted-sites, tags: [hosted-sites] }

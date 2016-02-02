@@ -20,6 +20,9 @@
   - git-core
   - awscli
   - ansible
+  - python-pip
+  - python-boto
+  - python-setuptools
   - python-passlib
 
 - name: Validate timezone variable

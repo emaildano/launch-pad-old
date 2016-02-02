@@ -1,10 +1,11 @@
 ---
-- name: Server
+- name: Local Dev Enviorment
   hosts: all:vagrant
-  sudo: yes
+  become: yes
   roles:
     - { role: common, tags: [common] }
     - { role: ferm, tags: [ferm] }
+    - { role: users, tags: [users] }
     - { role: sshd, tags: [sshd] }
     - { role: php, tags: [php] }
     - { role: hhvm, tags: [hhvm] }
@@ -12,3 +13,4 @@
     - { role: memcached, tags: [memcached] }
     - { role: composer, tags: [composer] }
     - { role: wp-cli, tags: [wp-cli] }
+    - { role: hosted-sites, tags: [hosted-sites] }

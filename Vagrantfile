@@ -5,7 +5,7 @@ require "yaml"
 VAGRANTFILE_API_VERSION = "2"
 
 ANSIBLE_PATH = __dir__
-config_file = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'sites.yml')
+config_file = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'hosted-sites.yml')
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
@@ -23,13 +23,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Hosts
   if File.exists?(config_file)
-    sites = YAML.load_file(config_file)['sites']
-    fail_with_message "No sites found in #{config_file}." if sites.to_h.empty?
+    hosted_sites = YAML.load_file(config_file)['hosted_sites']
+    fail_with_message "No sites found in #{config_file}." if hosted_sites.to_h.empty?
   else
     fail_with_message "#{config_file} was not found. Please set `ANSIBLE_PATH` in your Vagrantfile."
   end
 
-  hostname, *aliases = sites.flat_map { |(_name, site)| site['site_hosts'] }
+  hostname, *aliases = hosted_sites.flat_map { |(_name, site)| site['site_hosts'] }
   config.vm.hostname = hostname
   www_aliases = ["www.#{hostname}"] + aliases.map { |host| "www.#{host}" }
 

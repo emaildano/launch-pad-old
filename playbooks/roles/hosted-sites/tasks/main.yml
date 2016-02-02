@@ -6,27 +6,24 @@
     path: "{{ www_root }}"
     owner: "{{ web_user }}"
     group: "{{ web_group }}"
-    recurse: yes
-    mode: g+rws
+    mode: 0755
     state: directory
-  with_dict: sites
+  with_dict: hosted_sites
 
 - name: Create logs folder
   file:
     path: "{{ www_root }}/{{ item.key }}/logs"
     owner: "{{ web_user }}"
     group: "{{ web_group }}"
-    recurse: yes
-    mode: g+rws
+    mode: 0755
     state: directory
-  with_dict: sites
+  with_dict: hosted_sites
 
 - name: Create web folder
   file:
     path: "{{ www_root }}/{{ item.key }}/web"
     owner: "{{ web_user }}"
     group: "{{ web_group }}"
-    recurse: yes
-    mode: g+rws
+    mode: 0755
     state: directory
-  with_dict: sites
+  with_dict: hosted_sites

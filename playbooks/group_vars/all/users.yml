@@ -9,3 +9,11 @@ users:
   - name: "{{ web_user }}"
     groups:
       - "{{ web_group }}"
+  - name: dolson
+    groups:
+      - "{{ web_group }}"
+      - sudo
+  - name: sbaer
+    groups:
+      - "{{ web_group }}"
+      - sudo
