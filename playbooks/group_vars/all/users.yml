@@ -11,9 +11,9 @@ users:
       - "{{ web_group }}"
   - name: dolson
     groups:
-      - "{{ web_group }}"
       - sudo
+      - "{{ web_group }}"
   - name: sbaer
     groups:
-      - "{{ web_group }}"
       - sudo
+      - "{{ web_group }}"

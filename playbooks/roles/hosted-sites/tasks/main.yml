@@ -27,3 +27,9 @@
     mode: 0755
     state: directory
   with_dict: hosted_sites
+
+- name: Set ACLs
+  acl: name=/srv/www recursive=yes entity=www-data etype=group permissions=rwx state=present
+
+- name: Set ACL Default
+  acl: name=/srv/www recursive=yes default=yes entity=www-data etype=group permissions=rwx state=present

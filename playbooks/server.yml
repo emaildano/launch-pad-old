@@ -1,7 +1,7 @@
 ---
 - name: Server
   hosts: all:vagrant
-  sudo: yes
+  become: yes
   roles:
     - { role: common, tags: [common] }
     - { role: ferm, tags: [ferm] }

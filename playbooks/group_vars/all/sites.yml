@@ -3,15 +3,9 @@
 # ==============================================================================
 
 hosted_sites:
-  site-one.com:
+  local.j2made.com:
     site_hosts:
-      - site-one.dev
-    cache:
-      enabled: false
-      duration: 30s
-  site-two.com:
-    site_hosts:
-      - site-two.dev
+      - local.dev
     cache:
       enabled: false
       duration: 30s

@@ -5,7 +5,7 @@ require "yaml"
 VAGRANTFILE_API_VERSION = "2"
 
 ANSIBLE_PATH = __dir__
-config_file = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'hosted-sites.yml')
+config_file = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'sites.yml')
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 

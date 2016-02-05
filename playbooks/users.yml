@@ -1,7 +1,0 @@
----
-- name: Setup Users
-  hosts: all:localhost
-  sudo: yes
-
-  roles:
-    - { role: users, tags: [users] }
