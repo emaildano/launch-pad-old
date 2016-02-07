@@ -1,16 +1,6 @@
 ---
-- name: Example of provisioning servers
-  hosts: 127.0.0.1
-  connection: local
-  tasks:
-    - name: Launch Instance
-      ec2:
-        key_name: dev.j2made.com
-        instance_type: t2.nano
-        image: ami-fce3c696
-        wait: yes
-        count: 1
-        group: All Traffic
-        vpc_subnet_id: subnet-5138dd08
-        region: us-east-1
-      register: ec2
+- name: Launch ec2 Instance
+  hosts: localhost
+  become: "{{ ec2_root }}"
+  roles:
+    - { role: ec2, tags: [ec2] }

@@ -1,0 +1,9 @@
+---
+ec2_root: Ubuntu
+ec2_security_group: WebServerSG
+ec2_subnet: subnet-5138dd08
+ec2_region: us-east-1
+ec2_ami: ami-fce3c696
+ec2_keyname: dev.j2made.com
+
+ec2_epi: 54.83.35.172
