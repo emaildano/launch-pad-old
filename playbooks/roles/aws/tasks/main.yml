@@ -1,0 +1,4 @@
+
+---
+- include: ec2.yml
+  tags: ec2

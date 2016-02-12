@@ -1,6 +1,0 @@
----
-- name: Launch ec2 Instance
-  hosts: localhost
-  become: "{{ ec2_root }}"
-  roles:
-    - { role: ec2, tags: [ec2] }
