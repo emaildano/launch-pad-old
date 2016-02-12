@@ -1,7 +1,7 @@
 ---
 - name: Setup Hosted Sites
   hosts: all:localhost
-  sudo: yes
+  become_method: sudo
 
   vars_files:
     - roles/nginx/defaults/main.yml
