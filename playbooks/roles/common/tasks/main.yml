@@ -18,6 +18,8 @@
     update_cache: yes
   with_items:
     - python-software-properties
+    - python-setuptools
+    - python-dev
     - python-pycurl
     - build-essential
     - software-properties-common
@@ -25,6 +27,14 @@
     - git-core
     - awscli
     - ansible
+    - acl
+
+- name: Install pip Packages
+  easy_install:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - pip
 
 - name: Upgrade Packages
   apt: upgrade=dist

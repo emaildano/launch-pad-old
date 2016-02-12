@@ -28,3 +28,9 @@
     group: root
     validate: "/usr/sbin/visudo -cf %s"
   when: web_sudoers
+
+- name: Add SSH keys
+  authorized_key: user="{{ item.0.name }}" key="{{ item.1 }}"
+  with_subelements:
+    - users | default([])
+    - keys

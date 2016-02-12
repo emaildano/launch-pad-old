@@ -10,5 +10,4 @@
     - include: roles/common/handlers/main.yml
 
   roles:
-    - { role: users, tags: [users] }
     - { role: hosted-sites, tags: [hosted-sites] }
