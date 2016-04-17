@@ -1,0 +1,7 @@
+---
+- name: Server
+  hosts: localhost
+  become: yes
+
+- include: server.yml
+- include: sites.yml

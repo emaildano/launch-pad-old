@@ -1,6 +1,6 @@
 ---
 - include: nginx.yml
-- include_vars: https://gist.githubusercontent.com/emaildano/c1cd50e966f9c9acabc8/raw/f70951042f96ada32285d6216611d86baacc9d62/sites.yml
+- include_vars: ~/sites.yml
 
 - name: Create web root
   file:

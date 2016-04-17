@@ -11,15 +11,3 @@ users:
       - "{{ web_group }}"
     keys:
       - "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-  - name: dolson
-    groups:
-      - sudo
-      - "{{ web_group }}"
-    keys:
-      - "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-  - name: sbaer
-    groups:
-      - sudo
-      - "{{ web_group }}"
-    keys:
-      - "{{ lookup('file', '~/.ssh/shaun.pub') }}"
