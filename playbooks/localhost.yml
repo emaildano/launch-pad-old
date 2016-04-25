@@ -1,5 +1,5 @@
 ---
-- name: Server
+- name: Localhost
   hosts: localhost
   become: yes
 

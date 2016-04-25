@@ -3,9 +3,10 @@
 # ==============================================================================
 
 hosted_sites:
-  local.j2made.com:
+  apollo.dev:
     site_hosts:
-      - local.dev
+      - apollo.dev
+    local_path: ~/dev/apollo.web
     cache:
       enabled: false
       duration: 30s

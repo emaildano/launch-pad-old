@@ -9,6 +9,11 @@ config_file = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'sites.yml'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1024
+    v.cpus = 1
+  end
+
   # Box
   config.vm.box = "ubuntu/trusty64"
 
@@ -18,7 +23,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Ansible
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "playbooks/server.yml"
+    ansible.groups = {
+      'localhost' => ['default']
+    }
+
+    ansible.playbook = "playbooks/localhost.yml"
   end
 
   # Hosts
@@ -40,6 +49,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # Synced Folders
-  config.vm.synced_folder "./playbooks/", "/srv/playbooks", type: "nfs"
+  if !Vagrant.has_plugin? 'vagrant-bindfs'
+    fail_with_message "vagrant-bindfs missing, please install the plugin with this command:\nvagrant plugin install vagrant-bindfs"
+  else
+    hosted_sites.each_pair do |name, site|
+    config.vm.synced_folder local_site_path(site), nfs_path(name), type: 'nfs'
+    config.bindfs.bind_folder nfs_path(name), remote_site_path(name), u: 'web', g: 'www-data', o: 'nonempty'
+  end
+  end
 
+end
+
+def local_site_path(site)
+  File.expand_path(site['local_path'], ANSIBLE_PATH)
+end
+
+def nfs_path(site_name)
+  "/vagrant-nfs-#{site_name}"
+end
+
+def remote_site_path(site_name)
+  "/srv/www/#{site_name}/web"
 end

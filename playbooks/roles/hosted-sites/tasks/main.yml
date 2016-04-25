@@ -1,6 +1,6 @@
 ---
 - include: nginx.yml
-- include_vars: ~/sites.yml
+- include_vars: group_vars/all/sites.yml
 
 - name: Create web root
   file:
@@ -30,7 +30,11 @@
   with_dict: hosted_sites
 
 - name: Set ACLs
-  acl: name=/srv/www recursive=yes entity=www-data etype=group permissions=rwx state=present
-
-- name: Set ACL Default
-  acl: name=/srv/www recursive=yes default=yes entity=www-data etype=group permissions=rwx state=present
+  acl:
+    name: "{{ www_root }}"
+    recursive: yes
+    default: yes
+    entity: "{{ web_group }}"
+    etype: group
+    permissions: rwx
+    state: present
