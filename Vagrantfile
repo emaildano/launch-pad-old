@@ -53,10 +53,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     fail_with_message "vagrant-bindfs missing, please install the plugin with this command:\nvagrant plugin install vagrant-bindfs"
   else
     hosted_sites.each_pair do |name, site|
-    config.vm.synced_folder local_site_path(site), nfs_path(name), type: 'nfs'
-    config.bindfs.bind_folder nfs_path(name), remote_site_path(name), u: 'web', g: 'www-data', o: 'nonempty'
+      config.vm.synced_folder "~/dev/apollo.web", "/srv/www/apollo.dev/web", type: 'nfs'
+      # config.bindfs.bind_folder nfs_path(name), remote_site_path(name), u: 'web', g: 'www-data', o: 'nonempty'
+    end
   end
-  end
+
+  # config.vm.synced_folder "src/", "/srv/website"
 
 end
 

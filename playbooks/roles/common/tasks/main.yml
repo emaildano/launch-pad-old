@@ -19,6 +19,7 @@
   with_items:
     - python-software-properties
     - python-setuptools
+    - python-mysqldb
     - python-dev
     - python-pycurl
     - build-essential
