@@ -1,6 +1,15 @@
 ---
 - include: nginx.yml
-- include_vars: group_vars/all/sites.yml
+- include_vars: "{{ item }}"
+  with_first_found:
+  - "~/sites.yml"
+  - "group_vars/all/sites.yml"
+
+- name: Inventory folders
+  stat:
+    path: "{{ www_root }}/{{ item.key }}/web"
+  with_dict: hosted_sites
+  register: web_root
 
 - name: Create web root
   file:
@@ -28,6 +37,7 @@
     mode: 0755
     state: directory
   with_dict: hosted_sites
+  when: web_root.stat.isdir is defined and web_root.stat.isdir
 
 - name: Set ACLs
   acl:
@@ -38,3 +48,4 @@
     etype: group
     permissions: rwx
     state: present
+  when: sym.stat.islnk is defined and sym.stat.islnk == False
