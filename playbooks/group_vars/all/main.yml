@@ -4,6 +4,7 @@
 
 www_root: /srv/www
 apt_cache_valid_time: 86400
+sites_config: ~/sites.yml
 
 web_sudoers:
   - "/usr/sbin/service hhvm *"
@@ -32,9 +33,3 @@ ferm_input_list:
     dport: [ssh]
     seconds: 300
     hits: 20
-
-# ==============================================================================
-# MariaDB
-# ==============================================================================
-
-mysql_root_password: root

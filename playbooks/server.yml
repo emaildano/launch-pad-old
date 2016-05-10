@@ -6,7 +6,6 @@
     - { role: common, tags: [common] }
     - { role: ferm, tags: [ferm] }
     - { role: sshd, tags: [sshd] }
-    - { role: mariadb, tags: [mariadb] }
     - { role: php, tags: [php] }
     - { role: hhvm, tags: [hhvm] }
     - { role: nginx, tags: [nginx] }
