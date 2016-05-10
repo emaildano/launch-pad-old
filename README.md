@@ -14,6 +14,19 @@ Lifting space junk into orbit
 2. Add sites and config to `sites.yml`
 3. Run `vagrant up`
 
+## Sites Config
+1. Default site vars is located `playbooks/group_vars/all/sites.yml`
+2. `~/sites.yml` overrides the default settings
+3. This override location can be edited in `playbooks/group_vars/all/main.yml`, `sites_config`
+
+## Adding Sites
+1. Edit your prefered `sites.yml` file. If you haven't set one up refer to the Sites Config section above
+2. Run `vagrant reload --provision`
+
+## Resolving Errors
+1. Try `vagrant reload` or `vagrant reload --provision` again
+2. [Submit an issue](/issues) here if all else fails
+
 ## Playbooks
 For all various stages
 
