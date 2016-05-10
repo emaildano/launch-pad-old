@@ -25,10 +25,10 @@ Lifting space junk into orbit
 
 ## Resolving Errors
 1. Try `vagrant reload` or `vagrant reload --provision` again
-2. [Submit an issue](https://github.com/emaildano/launch-pad/issues) here if all else fails
+2. [Submit an issue](https://github.com/emaildano/launch-pad/issues) if all else fails
 
 ## Playbooks
-For all various stages
+For all various mission
 
 ### server.yml
 The foundation and first step of any environment
