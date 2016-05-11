@@ -1,4 +1,9 @@
 ---
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ sites_config }}"
+    - "group_vars/all/sites.yml"
+
 - name: Create WordPress configuration for Nginx
   template: src="wordpress-site.conf.j2"
             dest="/etc/nginx/sites-available/{{ item.key }}.conf"

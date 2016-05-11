@@ -2,8 +2,8 @@
 - include: nginx.yml
 - include_vars: "{{ item }}"
   with_first_found:
-  - "~/sites.yml"
-  - "group_vars/all/sites.yml"
+    - "{{ sites_config }}"
+    - "group_vars/all/sites.yml"
 
 - name: Inventory folders
   stat:
