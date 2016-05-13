@@ -17,13 +17,15 @@ worker_processes auto;
 
 # Maximum open file descriptors per process;
 # should be > worker_connections.
-worker_rlimit_nofile 8192;
+worker_rlimit_nofile 10240;
 
 events {
   # When you need > 8000 * cpu_cores connections, you start optimizing your OS,
   # and this is probably the point at which you hire people who are smarter than
   # you, as this is *a lot* of requests.
-  worker_connections 8000;
+  worker_connections 8192;
+  use epoll;
+  accept_mutex_delay 100ms;
 }
 
 # Default error log file
@@ -35,6 +37,7 @@ http {
 
   # Hide nginx version information.
   server_tokens off;
+  server_name_in_redirect off;
 
   # Setup the fastcgi cache.
   fastcgi_buffers {{ nginx_fastcgi_buffers }};
@@ -58,6 +61,10 @@ http {
                     '$status $body_bytes_sent "$http_referer" '
                     '"$http_user_agent" "$http_x_forwarded_for"';
 
+  # Sets the maximum allowed size of the client request body, specified in the
+  # “Content-Length” request header field.
+  client_max_body_size 4M;
+
   # Default log file
   # (this is only used when you don't override access_log on a server{} level)
   access_log {{ nginx_logs_root }}/access.log main;
@@ -65,7 +72,7 @@ http {
   # How long to allow each connection to stay idle; longer values are better
   # for each individual client, particularly for SSL, but means that worker
   # connections are tied up longer. (Default: 65)
-  keepalive_timeout 20;
+  keepalive_timeout 5;
 
   # Speed up file transfers by using sendfile() to copy directly
   # between descriptors rather than using read()/write().
@@ -75,6 +82,10 @@ http {
   # since TCP frames are filled up before being sent out. (adds TCP_CORK)
   tcp_nopush      on;
 
+  # Provides the configuration file context in which the HTTP server
+  # directives are specified.
+  if_modified_since before;
+
   # Compression
 
   # Enable Gzip compressed.
@@ -83,7 +94,11 @@ http {
   # Compression level (1-9).
   # 5 is a perfect compromise between size and cpu usage, offering about
   # 75% reduction for most ascii files (almost identical to level 9).
-  gzip_comp_level    5;
+  gzip_comp_level    6;
+
+  # Sets the minimum length of a response that will be gzipped. The length
+  # is determined only from the “Content-Length” response header field.
+  gzip_http_version 1.0;
 
   # Don't compress anything that's already small and unlikely to shrink much
   # if at all (the default is 20 bytes, which is bad as that usually leads to
