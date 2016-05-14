@@ -6,9 +6,14 @@ VAGRANTFILE_API_VERSION = "2"
 
 ANSIBLE_PATH = __dir__
 config_file = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'main.yml')
+default_sites_config = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'sites.yml')
 sites_config_path = YAML.load_file(config_file)['sites_config']
 
-sites_config = File.expand_path(sites_config_path)
+if File.exists?(sites_config_path)
+  sites_config = File.expand_path(sites_config_path)
+else
+  sites_config = File.expand_path(default_sites_config)
+end
 
 def local_site_path(site)
   File.expand_path(site['local_path'], ANSIBLE_PATH)
