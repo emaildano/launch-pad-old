@@ -5,8 +5,8 @@ require "yaml"
 VAGRANTFILE_API_VERSION = "2"
 
 ANSIBLE_PATH = __dir__
-config_file = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'main.yml')
 default_sites_config = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'sites.yml')
+config_file = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'main.yml')
 sites_config_path = YAML.load_file(config_file)['sites_config']
 
 if File.exists?(sites_config_path)
