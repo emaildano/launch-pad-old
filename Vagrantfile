@@ -9,7 +9,7 @@ default_sites_config = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 's
 config_file = File.join(ANSIBLE_PATH, 'playbooks/group_vars', 'all', 'main.yml')
 sites_config_path = YAML.load_file(config_file)['sites_config']
 
-if File.exists?(sites_config_path)
+if defined?(sites_config_path)
   sites_config = File.expand_path(sites_config_path)
 else
   sites_config = File.expand_path(default_sites_config)
@@ -66,7 +66,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Synced Folders
   hosted_sites.each_pair do |name, site|
-    config.vm.synced_folder local_site_path(site), remote_site_path(name), type: 'nfs'
+    config.vm.synced_folder local_site_path(site), remote_site_path(name), type: 'nfs', map_uid: 0, map_gid: 0
   end
 
 end
