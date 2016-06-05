@@ -1,23 +1,7 @@
 ---
-- name: Launch ec2 Instance
-  hosts: localhost
-  become: "{{ ec2_root }}"
-  connection: local
-  roles:
-    - { role: aws, tags: [aws] }
-
-- name: Configure provisioned servers
-  hosts: Ansible
-  user: ubuntu
+- name: Provision AWS Instance
+  hosts: all
   become: yes
-  roles:
-    - { role: common, tags: [common] }
-    - { role: ferm, tags: [ferm] }
-    - { role: users, tags: [users] }
-    - { role: sshd, tags: [sshd] }
-    - { role: php, tags: [php] }
-    - { role: hhvm, tags: [hhvm] }
-    - { role: nginx, tags: [nginx] }
-    - { role: memcached, tags: [memcached] }
-    - { role: composer, tags: [composer] }
-    - { role: wp-cli, tags: [wp-cli] }
+
+- include: server.yml
+- include: sites.yml

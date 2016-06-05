@@ -46,3 +46,7 @@ Working out the kinks ;)
 
 ### SSH Login as User
 `ssh -p 2222 user@host`
+
+## Deploying to AWS
+
+`ansible-playbook -l tag_Key_value playbooks/server.yml`
