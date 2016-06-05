@@ -1,4 +1,2 @@
-
 ---
-- include: ec2.yml
-  tags: ec2
+- include: security-group.yml

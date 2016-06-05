@@ -1,7 +1,6 @@
 ---
-- name: Provision AWS Instance
-  hosts: all
-  become: yes
-
-- include: server.yml
-- include: sites.yml
+- name: Example of provisioning servers
+  hosts: 127.0.0.1
+  connection: local
+  roles:
+    - { role: aws, tags: [aws] }
