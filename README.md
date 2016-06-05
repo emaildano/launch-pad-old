@@ -49,8 +49,11 @@ Working out the kinks ;)
 
 ## Deploying to AWS
 
-## Target Specific Tag
+### Target Specific Tag
 `ansible-playbook -l tag_Key_value playbooks/server.yml`
 
 ### Override Defaults with Variable in CLI
 `ansible-playbook -l tag_Name_ansible playbooks/sites.yml --extra-vars "sites_config=~/other-sites.yml"`
+
+### Launch Instance, Create Security Group, etc.
+`ansible-playbook playbooks/aws.yml`
