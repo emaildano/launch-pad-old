@@ -49,6 +49,9 @@ Working out the kinks ;)
 
 ## Deploying to AWS
 
+### Ping Specific Tag
+`ansible -m ping -u ubuntu tag_Key_value`
+
 ### Target Specific Tag
 `ansible-playbook -l tag_Key_value playbooks/server.yml`
 
