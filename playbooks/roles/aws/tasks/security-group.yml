@@ -1,4 +1,6 @@
 - name: Create security group
+  tags:
+    - launch
   local_action:
     module: ec2_group
     name: WebServer
@@ -18,3 +20,14 @@
         from_port: 22
         to_port: 22
         cidr_ip: 0.0.0.0/0
+
+- name: Delete security group
+  tags:
+    - terminate
+  local_action:
+    module: ec2_group
+    name: WebServer
+    description: Default Web Server
+    region: us-east-1
+    state: absent
+    vpc_id: vpc-666bb003
