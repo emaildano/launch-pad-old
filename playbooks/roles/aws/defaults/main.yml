@@ -6,3 +6,5 @@ ec2_region: us-east-1
 ec2_ami: ami-fce3c696
 ec2_keypair: j2
 ec2_instance_type: t2.nano
+ec2_tag_name: Ansible
+ec2_security_group_name: WebServer
