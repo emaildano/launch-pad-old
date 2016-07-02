@@ -8,3 +8,5 @@ ec2_keypair: j2
 ec2_instance_type: t2.nano
 ec2_tag_name: Ansible
 ec2_security_group_name: WebServer
+ec2_vpc_id: vpc-666bb003
+ec2_volume_size: 10

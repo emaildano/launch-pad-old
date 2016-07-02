@@ -6,8 +6,8 @@
     module: ec2_group
     name: "{{ ec2_security_group_name }}"
     description: Default Web Server
-    region: us-east-1
-    vpc_id: vpc-666bb003
+    region: "{{ ec2_region }}"
+    vpc_id: "{{ ec2_vpc_id }}"
     rules:
       - proto: tcp
         from_port: 80
@@ -37,7 +37,7 @@
     wait: true
     vpc_subnet_id: "{{ ec2_subnet }}"
     volumes:
-      - volume_size: 10
+      - volume_size: "{{ ec2_volume_size }}"
         volume_type: gp2
         delete_on_termination: true
         device_name: /dev/sdb
